@@ -15,13 +15,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class EmailActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_email);
         mAuth = FirebaseAuth.getInstance();
     }
     public void onStart(){ //if register no need o login again
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //check if user sign in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser !=null)
-            startActivity(new Intent(MainActivity.this, WelcomActivity.class));
+            startActivity(new Intent(EmailActivity.this, TextToSpeechActivity.class));
 
     }
 
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) { //if register work move to welcome
-                            startActivity(new Intent(MainActivity.this, WelcomActivity.class));
+                            startActivity(new Intent(EmailActivity.this, TextToSpeechActivity.class));
                         } else
                                 {
-                                    Toast.makeText(MainActivity.this, "registe failed",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(EmailActivity.this, "registe failed",Toast.LENGTH_LONG).show();
                                 }
                     }
                 });
@@ -60,15 +60,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) { //sign in succses, update UI with the signed in user information
-                            startActivity(new Intent(MainActivity.this, WelcomActivity.class));
+                            startActivity(new Intent(EmailActivity.this, TextToSpeechActivity.class));
                         }
                         else
                             {
-                                Toast.makeText(MainActivity.this, "login failed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(EmailActivity.this, "login failed",Toast.LENGTH_LONG).show();
                             }
                     }
                 });
 
     }
+
 
 }
