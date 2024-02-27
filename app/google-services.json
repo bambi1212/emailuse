@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "527005823001",
+    "project_id": "logintry-4622c",
+    "storage_bucket": "logintry-4622c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527005823001:android:298474bb002a1bafdc3a88",
+        "android_client_info": {
+          "package_name": "com.example.logintry"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClaVnZhshop7Fx5o-Ur2tTF9M-1ziQN2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
