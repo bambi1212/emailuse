@@ -33,7 +33,7 @@ public class WelcomActivity extends AppCompatActivity {
             @Override
             public void onInit(int status) { //enable play button
                 if (status == TextToSpeech.SUCCESS) {
-                    int result = mTTS.setLanguage(Locale.GERMAN);
+                    int result = mTTS.setLanguage(Locale.UK);
 
                     if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -73,11 +73,19 @@ public class WelcomActivity extends AppCompatActivity {
     }
 
     public void logout(View v) {
+        if (mTTS.isSpeaking()) {
+            mTTS.speak("let me finnish dummy", TextToSpeech.QUEUE_FLUSH, null);
+            mTTS.speak(mEditText.getText().toString(), TextToSpeech.QUEUE_ADD, null);
 
+        } else {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, MainActivity.class));
+        }
+    }
 
+    public void moveToCamera(View view){
+        startActivity(new Intent(this, CameraActivity.class));
 
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override

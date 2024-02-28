@@ -21,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //move to camera Activity
+
+       // Intent intent = new Intent(this, CameraActivity.class);
+        //startActivity(intent);
+
+
+
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
     }
