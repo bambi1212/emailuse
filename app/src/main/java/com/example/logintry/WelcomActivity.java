@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Locale;
 
-public class TextToSpeechActivity extends AppCompatActivity {
-    private android.speech.tts.TextToSpeech mTTS;
+public class WelcomActivity extends AppCompatActivity {
+    private TextToSpeech mTTS;
     private EditText mEditText;
     private SeekBar mSeekBarPitch;
     private SeekBar mSeekBarSpeed;
@@ -25,17 +26,17 @@ public class TextToSpeechActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_texttospech);
+        setContentView(R.layout.activity_welcom);
 
         mButtonSpeak = findViewById(R.id.play);
-        mTTS = new android.speech.tts.TextToSpeech(this, new android.speech.tts.TextToSpeech.OnInitListener() {
+        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) { //enable play button
-                if (status == android.speech.tts.TextToSpeech.SUCCESS) {
+                if (status == TextToSpeech.SUCCESS) {
                     int result = mTTS.setLanguage(Locale.GERMAN);
 
-                    if (result == android.speech.tts.TextToSpeech.LANG_MISSING_DATA
-                            || result == android.speech.tts.TextToSpeech.LANG_NOT_SUPPORTED) {
+                    if (result == TextToSpeech.LANG_MISSING_DATA
+                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "language not supported");
                     } else {
                         mButtonSpeak.setEnabled(true);
@@ -66,22 +67,17 @@ public class TextToSpeechActivity extends AppCompatActivity {
 
         mTTS.setPitch(pitch);
         mTTS.setSpeechRate(speed);
-        mTTS.speak(text, android.speech.tts.TextToSpeech.QUEUE_FLUSH, null);
+        mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 
 
     }
 
     public void logout(View v) {
-        if (mTTS.isSpeaking()) {
-            mTTS.speak("let me finnish dumy", android.speech.tts.TextToSpeech.QUEUE_FLUSH, null);
-            mTTS.speak(mEditText.getText().toString(), android.speech.tts.TextToSpeech.QUEUE_ADD, null);
-
-        } else {
 
 
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, EmailActivity.class));
-        }
+
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
@@ -91,10 +87,6 @@ public class TextToSpeechActivity extends AppCompatActivity {
             mTTS.shutdown();
         }
         super.onDestroy();
-
-    }
-    public void moveToCameraActivity(View b){
-        startActivity(new Intent(this, CameraActivity.class));
 
     }
 }
