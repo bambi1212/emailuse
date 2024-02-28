@@ -73,6 +73,9 @@ public class WelcomActivity extends AppCompatActivity {
     }
 
     public void logout(View v) {
+
+
+
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(this, MainActivity.class));
     }
