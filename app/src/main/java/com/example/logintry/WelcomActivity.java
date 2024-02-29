@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class WelcomActivity extends AppCompatActivity {
@@ -22,11 +25,22 @@ public class WelcomActivity extends AppCompatActivity {
     private SeekBar mSeekBarSpeed;
     private Button mButtonSpeak;
 
+    Spinner spinner; //for country chose
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcom);
+
+        spinner = findViewById(R.id.country_spin);
+        String[] all_country=get_all_countries_action();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R
+                .layout.simple_list_item_1, all_country);
+
+        spinner.setAdapter(adapter);
 
         mButtonSpeak = findViewById(R.id.play);
         mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -58,6 +72,29 @@ public class WelcomActivity extends AppCompatActivity {
 
     }
 
+
+    public String[] get_all_countries_action() {
+        // Get all available countries using Locale
+        String[] countryCodes = Locale.getISOCountries();
+        ArrayList<String> countriesList = new ArrayList<>();
+
+        // Populate the array with country names, excluding "Palestine"
+        for (String countryCode : countryCodes) {
+            Locale locale = new Locale("", countryCode);
+            String countryName = locale.getDisplayCountry();
+            if (!countryName.equals("Palestine")) {
+                countriesList.add(countryName);
+            }
+        }
+
+        // Convert ArrayList to array
+        String[] countriesArray = new String[countriesList.size()];
+        countriesArray = countriesList.toArray(countriesArray);
+
+        return countriesArray;
+    }
+
+
     private void speak() {
         String text = mEditText.getText().toString();
         float pitch = (float) mSeekBarPitch.getProgress() / 50;
@@ -80,6 +117,7 @@ public class WelcomActivity extends AppCompatActivity {
         } else {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 
