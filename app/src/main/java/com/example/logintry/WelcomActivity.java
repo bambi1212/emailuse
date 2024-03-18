@@ -3,10 +3,13 @@ package com.example.logintry;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+
+
 
 public class WelcomActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
@@ -29,10 +35,17 @@ public class WelcomActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcom);
+
+        // Make HTTP request to retrieve image URL
+        // For example, from an ImageView or by decoding a resource
+
+
 
         spinner = findViewById(R.id.country_spin);
         String[] all_country=get_all_countries_action();
@@ -41,6 +54,8 @@ public class WelcomActivity extends AppCompatActivity {
                 .layout.simple_list_item_1, all_country);
 
         spinner.setAdapter(adapter);
+
+
 
         mButtonSpeak = findViewById(R.id.play);
         mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {

@@ -111,5 +111,11 @@
         android:layout_marginTop="87dp"
         android:layout_marginEnd="10dp"
         android:minHeight="48dp" />
+
+    <ImageView
+        android:id="@+id/willBeFromAnvil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </LinearLayout>
 

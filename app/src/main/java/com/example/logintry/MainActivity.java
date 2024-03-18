@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this, WelcomActivity.class));
                         } else
                                 {
-                                    Toast.makeText(MainActivity.this, "registe failed",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, "register failed",Toast.LENGTH_LONG).show();
                                 }
                     }
                 });
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         EditText emailText = findViewById(R.id. edittext_email);
         EditText passwordText = findViewById(R.id. edittext_password);
 
+        // Authenticate user with Firebase Authentication
         mAuth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
